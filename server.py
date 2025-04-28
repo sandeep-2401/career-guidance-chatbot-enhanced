@@ -33,11 +33,11 @@ def connect_db():
     """Establish a connection to the MySQL database."""
     try:
         return mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="sandeep.123",
-            database="student_career_db",
-            port=3306
+            host=os.environ.get('DB_HOST'),
+            user=os.environ.get('DB_USER'),
+            password=os.environ.get('DB_PASSWORD'),
+            database=os.environ.get('DB_NAME'),
+            port=int(os.environ.get('DB_PORT', 3306))  # default port 3306 if not given
         )
     except mysql.connector.Error as err:
         print("Database Error:", err)
